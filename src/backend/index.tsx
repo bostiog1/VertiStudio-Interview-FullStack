@@ -9,20 +9,21 @@ const db = new Database(":memory:");
 
 // Seed the database with random data
 seedDatabase(db, {
-	clientCount: 30,
-	bitSlowCount: 20,
-	transactionCount: 50,
-	clearExisting: true,
+  clientCount: 30,
+  bitSlowCount: 20,
+  transactionCount: 50,
+  clearExisting: true,
 });
 
 const server = serve({
-	routes: {
-		// Serve index.html for all unmatched routes.
-		"/*": index,
-		"/api/transactions": () => {
-			try {
-				const transactions = db
-					.query(`
+  routes: {
+    // Serve index.html for all unmatched routes.
+    "/*": index,
+    "/api/transactions": () => {
+      try {
+        const transactions = db
+          .query(
+            `
           SELECT 
             t.id, 
             t.coin_id, 
@@ -41,27 +42,28 @@ const server = serve({
           JOIN clients buyer ON t.buyer_id = buyer.id
           JOIN coins c ON t.coin_id = c.coin_id
           ORDER BY t.transaction_date DESC
-        `)
-					.all();
+        `
+          )
+          .all();
 
-				// Add computed BitSlow to each transaction
-				const enhancedTransactions = transactions.map((transaction) => ({
-					...transaction,
-					computedBitSlow: computeBitSlow(
-						transaction.bit1,
-						transaction.bit2,
-						transaction.bit3,
-					),
-				}));
+        // Add computed BitSlow to each transaction
+        const enhancedTransactions = transactions.map((transaction) => ({
+          ...transaction,
+          computedBitSlow: computeBitSlow(
+            transaction.bit1,
+            transaction.bit2,
+            transaction.bit3
+          ),
+        }));
 
-				return Response.json(enhancedTransactions);
-			} catch (error) {
-				console.error("Error fetching transactions:", error);
-				return new Response("Error fetching transactions", { status: 500 });
-			}
-		},
-	},
-	development: process.env.NODE_ENV !== "production",
+        return Response.json(enhancedTransactions);
+      } catch (error) {
+        console.error("Error fetching transactions:", error);
+        return new Response("Error fetching transactions", { status: 500 });
+      }
+    },
+  },
+  development: process.env.NODE_ENV !== "production",
 });
 
 console.log(`🚀 Server running at ${server.url}`);

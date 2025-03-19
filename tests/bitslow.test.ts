@@ -1,5 +1,5 @@
 import { describe, expect, it } from "bun:test";
-import { computeBitSlow } from "../src/bitslow";
+import { computeBitSlow } from "../src/backend/api/bitslow";
 
 describe("BitSlow", () => {
 	it("should compute consistent hash for the same inputs", () => {
