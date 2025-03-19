@@ -1,4 +1,4 @@
-import "./index.css";
+import "../index.css";
 import { useState, useEffect } from "react";
 
 // Define the Transaction interface based on the API response
