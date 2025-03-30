@@ -5,12 +5,12 @@ export function registerUser(db: Database) {
   return async (req: Request) => {
     const { email, password, name, phone } = await req.json();
 
-    console.log("Received data, inside registerUser():", {
-      email,
-      password,
-      name,
-      phone,
-    });
+    // console.log("Received data, inside registerUser():", {
+    //   email,
+    //   password,
+    //   name,
+    //   phone,
+    // });
 
     // Validate input
     if (!email || !password || !name || !phone) {
