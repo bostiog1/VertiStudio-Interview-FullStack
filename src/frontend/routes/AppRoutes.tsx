@@ -7,6 +7,8 @@ import Dashboard from "../pages/Dashboard";
 import Endpoints from "../utils/Endpoints";
 import { TransactionsPage } from "../pages/TransactionsPage";
 import { ProtectedRoute } from "./ProtectedRoute";
+import { MarketplacePage } from "../pages/MarketplacePage";
+import { ProfilePage } from "../pages/ProfilePage";
 
 export const AppRoutes = () => {
   const routes = useMemo(
@@ -18,14 +20,21 @@ export const AppRoutes = () => {
         path: "/dashboard",
         element: (
           <ProtectedRoute>
-            <Dashboard />{" "}
-            {/* Dashboard is now always rendered for protected routes */}
+            <Dashboard />
           </ProtectedRoute>
         ),
         children: [
           {
             path: "", // Default child route (renders Dashboard)
             element: <div>Welcome to Dashboard </div>,
+          },
+          {
+            path: "profile", // /dashboard/profile
+            element: <ProfilePage />,
+          },
+          {
+            path: "marketplace", // /dashboard/marketplace
+            element: <MarketplacePage />,
           },
           {
             path: "transactions", // /dashboard/transactions

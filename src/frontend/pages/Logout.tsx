@@ -1,15 +1,24 @@
+// Logout.tsx
 import { useNavigate } from "react-router-dom";
+import AuthService from "../service/AuthService";
 
 const Logout = () => {
   const navigate = useNavigate();
 
-  const logout = () => {
-    // Delete authToken cookie
-    document.cookie =
-      "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  const logout = async () => {
+    try {
+      // Call the authService logout method
+      await AuthService.logout();
 
-    // Using navigate for SPA navigation
-    navigate("/login");
+      // Navigate to login page
+      navigate("/login");
+
+      // Optional: Force a full page reload to ensure all state is cleared
+      // window.location.reload();
+    } catch (error) {
+      console.error("Logout error:", error);
+      // Handle error (maybe show a toast notification)
+    }
   };
 
   return (
