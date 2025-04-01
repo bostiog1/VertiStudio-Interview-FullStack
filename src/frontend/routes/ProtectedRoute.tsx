@@ -1,6 +1,7 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AuthService from "../service/AuthService";
+import { AuthLoader } from "../components/AuthLoader";
 
 interface ProtectedRouteProps {
   children?: React.ReactNode; // To support wrapping child routes
@@ -11,44 +12,37 @@ export const ProtectedRoute = ({
   children,
   redirectPath = "/login",
 }: ProtectedRouteProps) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null); // Start as null to indicate loading
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const location = useLocation();
 
   useEffect(() => {
+    let isMounted = true; // Prevent state updates after unmount
+
     const checkAuth = async () => {
-      const authenticated = await AuthService.isAuthenticated();
-      setIsAuthenticated(authenticated);
+      try {
+        const authenticated = await AuthService.isAuthenticated();
+        if (isMounted) setIsAuthenticated(authenticated);
+      } catch (error) {
+        if (isMounted) setIsAuthenticated(false);
+      }
     };
 
-    checkAuth();
-  }, [location]); // Re-run the check on route changes
+    // Add slight delay to prevent flash on fast networks
+    const timer = setTimeout(checkAuth, 600);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
+  }, [location]);
 
   if (isAuthenticated === null) {
-    // You can render a loading indicator here if you want
-    return <div>Loading...</div>;
+    return <AuthLoader />; // Show loading screen
   }
 
   if (!isAuthenticated) {
     return <Navigate to={redirectPath} replace state={{ from: location }} />;
   }
 
-  return children; // Render child routes if available, otherwise Outlet
+  return children || <Outlet />;
 };
-
-// import { Navigate, Outlet } from "react-router-dom";
-
-// interface ProtectedRouteProps {
-//   isAuthenticated: boolean;
-//   redirectPath?: string;
-// }
-
-// export const ProtectedRoute = ({
-//   isAuthenticated,
-//   redirectPath = "/login",
-// }: ProtectedRouteProps) => {
-//   if (!isAuthenticated) {
-//     return <Navigate to={redirectPath} replace />;
-//   }
-
-//   return <Outlet />; // Render child routes
-// };

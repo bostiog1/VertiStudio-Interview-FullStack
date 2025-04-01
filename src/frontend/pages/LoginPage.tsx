@@ -36,15 +36,14 @@ const LoginPage = () => {
       );
     }
   };
-
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <div className="w-full max-w-md p-6 rounded-lg shadow-md bg-white dark:bg-gray-800 transition-colors">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 p-4">
+      <div className="w-full max-w-md p-6 rounded-lg shadow-md bg-white dark:bg-gray-800 mx-4">
         <h2 className="mb-4 text-2xl font-bold text-center text-gray-900 dark:text-gray-100">
           Login
         </h2>
         {message && (
-          <div className="mt-4 mb-4 rounded-md bg-red-200 dark:bg-red-600 p-3 text-center text-red-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-1 focus:ring-offset-red-500">
+          <div className="mt-4 mb-4 rounded-md bg-red-200 dark:bg-red-600 p-3 text-center text-red-600 dark:text-white">
             {message}
           </div>
         )}

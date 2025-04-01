@@ -21,12 +21,10 @@ export const Endpoints = {
   registerBack: urlBack("api/register"),
   validateToken: urlBack("api/validate-token"),
   refreshToken: urlBack("api/refresh-token"),
-
-  // logout: urlBack("api/logout"),
-  logout: urlBack("api/logout"), // Ensure this matches exactly
+  logout: urlBack("api/logout"),
 
   transactions: urlBack("api/transactions"),
-  users: urlBack("api/users"),
+  clients: urlBack("api/clients"),
   coins: urlBack("api/coins"),
 };
 
