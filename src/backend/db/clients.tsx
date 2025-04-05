@@ -6,7 +6,7 @@ export function seedClients(db: Database, count: number): number[] {
 
   const clientIds: number[] = [];
   const insertClient = db.prepare(`
-    INSERT INTO clients (name, email, phone, address) 
+    INSERT INTO clients (name, email, phone, address)
     VALUES (?, ?, ?, ?)
   `);
 
@@ -21,7 +21,7 @@ export function seedClients(db: Database, count: number): number[] {
       const address = faker.location.streetAddress({ useFullAddress: true });
 
       const info = insertClient.run(name, email, phone, address);
-      clientIds.push(Number(info.lastInsertId));
+      clientIds.push(Number(info.lastInsertRowid));
     }
   })();
 

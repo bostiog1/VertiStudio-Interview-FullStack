@@ -3,15 +3,29 @@ import { seedDatabase } from "./seed";
 import { initializeSchema } from "./schema";
 
 export function initializeDatabase() {
-  const db = new Database("mydb.sqlite"); // Use a file-based database instead of in-memory
-  initializeSchema(db); // Ensure tables exist
+  const db = new Database("bitslow.sqlite", { create: true });
+  db.exec("PRAGMA journal_mode = WAL;");
+  db.exec("PRAGMA foreign_keys = ON;");
 
+  initializeSchema(db);
+
+  // // CURRENT: Small dataset for testing
   seedDatabase(db, {
     clientCount: 30,
     bitSlowCount: 20,
     transactionCount: 50,
-    clearExisting: false, // Don't clear existing data
-    forceSeed: false, // Only seed if the database is empty
+    clearExisting: false,
+    forceSeed: false,
   });
+
+  // // FUTURE SCALING TO 1000 TRANSACTIONS:
+  // seedDatabase(db, {
+  //   clientCount: 100,
+  //   bitSlowCount: 500, // All possible BitSlow combinations
+  //   transactionCount: 1000, // Larger transaction history
+  //   clearExisting: true,
+  //   forceSeed: true,
+  // });
+
   return db;
 }
