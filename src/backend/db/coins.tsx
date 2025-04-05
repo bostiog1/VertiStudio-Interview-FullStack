@@ -10,7 +10,7 @@ export function seedCoins(
 
   const coinIds: number[] = [];
   const insertCoin = db.prepare(`
-    INSERT INTO coins (client_id, bit1, bit2, bit3, value) 
+    INSERT INTO coins (client_id, bit1, bit2, bit3, value)
     VALUES (?, ?, ?, ?, ?)
   `);
 
@@ -20,7 +20,7 @@ export function seedCoins(
   db.transaction(() => {
     for (let i = 0; i < count; i++) {
       const clientId =
-        Math.random() > 0.2
+        Math.random() > 0.4
           ? Math.floor(Math.random() * clientCount) + 1
           : null;
 
@@ -45,7 +45,7 @@ export function seedCoins(
       usedValues.add(value);
 
       const info = insertCoin.run(clientId, bit1, bit2, bit3, value);
-      coinIds.push(Number(info.lastInsertId));
+      coinIds.push(Number(info.lastInsertRowid));
     }
   })();
 
