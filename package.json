@@ -6,7 +6,7 @@
   "scripts": {
     "backend": "bun run src/backend/index.tsx",
     "frontend": "vite",
-    "dev": "concurrently \"bun run backend\" \"bun run frontend\"",
+    "dev": "concurrently \"bun run backend\" \"bun ruwan frontend\"",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"

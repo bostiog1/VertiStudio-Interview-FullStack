@@ -204,5 +204,6 @@ To check for possible errors:
 ```bash
 bun run lint
 ```
-#   V e r t i S t u d i o - I n t e r v i e w  
+#   V e r t i S t u d i o - I n t e r v i e w 
+ 
  
