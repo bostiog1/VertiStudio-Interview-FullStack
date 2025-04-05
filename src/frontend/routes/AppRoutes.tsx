@@ -9,6 +9,7 @@ import { TransactionsPage } from "../pages/TransactionsPage";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { MarketplacePage } from "../pages/MarketplacePage";
 import { ProfilePage } from "../pages/ProfilePage";
+import { Home } from "../pages/Home";
 
 export const AppRoutes = () => {
   const routes = useMemo(
@@ -26,7 +27,7 @@ export const AppRoutes = () => {
         children: [
           {
             path: "", // Default child route (renders Dashboard)
-            element: <div>Welcome to Dashboard </div>,
+            element: <Home />,
           },
           {
             path: "profile", // /dashboard/profile
@@ -46,8 +47,8 @@ export const AppRoutes = () => {
         path: "*", // Catch-all route for 404
         element: <Navigate to="/" replace />,
       },
-    ]
-    // The routes configuration doesn't depend on authentication status anymore
+    ],
+    []
   );
 
   return (

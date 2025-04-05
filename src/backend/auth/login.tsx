@@ -1,12 +1,42 @@
 import { Database } from "bun:sqlite";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { config } from "dotenv";
+
+config();
+
+const JWT_SECRET = process.env.JWT_SECRET || "";
+
+if (!JWT_SECRET) {
+  console.error("WARNING: JWT_SECRET is not set in environment variables!");
+}
+
+interface Client {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+}
 
 export function loginUser(db: Database) {
   return async (req: Request) => {
     try {
-      const { email, password } = await req.json();
+      // Ensure JWT_SECRET is available
+      if (!JWT_SECRET) {
+        return new Response(
+          JSON.stringify({
+            message: "Server misconfiguration: JWT_SECRET not set",
+          }),
+          {
+            status: 500,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+      }
 
+      const { email, password } = await req.json();
       // Validate input
       if (!email || !password) {
         return new Response(
@@ -19,9 +49,9 @@ export function loginUser(db: Database) {
           }
         );
       }
-
       // Find user in database
-      const user = db.query("SELECT * FROM clients WHERE email = ?").get(email);
+      const userQuery = db.query("SELECT * FROM clients WHERE email = ?");
+      const user = userQuery.get(email) as Client | null;
       if (!user) {
         return new Response(JSON.stringify({ message: "User not found" }), {
           status: 404,
@@ -30,10 +60,8 @@ export function loginUser(db: Database) {
           },
         });
       }
-
       // Verify password
       const passwordMatch = await bcrypt.compare(password, user.password);
-
       if (!passwordMatch) {
         return new Response(JSON.stringify({ message: "Invalid password" }), {
           status: 401,
@@ -42,22 +70,13 @@ export function loginUser(db: Database) {
           },
         });
       }
-
-      // Generate JWT token
-      const token = jwt.sign(
-        { id: user.id, email: user.email },
-        "your-secret-key",
-        {
-          expiresIn: "1h",
-        }
-      );
-
-      // The code below was creating an access token but this is done in index.tsx now, we just verify the database in the above code
-      //     // Return both token in response body (for localStorage) and in HttpOnly cookie
+      // Generate JWT token using the secret from .env
+      const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, {
+        expiresIn: "1h",
+      });
       return new Response(
         JSON.stringify({
           message: "Login successful",
-          // token: token, // Include token in response body
           user: {
             id: user.id,
             name: user.name,
@@ -68,8 +87,7 @@ export function loginUser(db: Database) {
           status: 200,
           headers: {
             "Content-Type": "application/json",
-            // "Set-Cookie": `token=${token}; HttpOnly; SameSite=Lax; Secure; Path=/; Max-Age=3600`,
-            "Set-Cookie": `token=${token}; HttpOnly; SameSite=Lax; Path=/; Max-Age=3600`,
+            "Set-Cookie": `token=${token}; HttpOnly; SameSite=Lax; Secure; Path=/; Max-Age=3600`,
           },
         }
       );

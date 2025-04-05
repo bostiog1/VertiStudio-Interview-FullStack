@@ -1,14 +1,11 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginSchema } from "../utils/validationSchema";
-import { useNavigate, Link } from "react-router-dom";
-import AuthService from "../service/AuthService";
-import Endpoints from "../utils/Endpoints";
+import { LoginSchema, loginSchema } from "../utils/validationSchema";
+import { Link } from "react-router-dom";
+import { useLoginPage } from "../hooks/useLoginPage";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
-  const [message, setMessage] = useState(""); // For displaying error/success messages
+  const { message, setMessage, handleLogin } = useLoginPage();
 
   const {
     register,
@@ -18,24 +15,10 @@ const LoginPage = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const handleLogin = async (data) => {
-    // 'data' will contain the form values
-    try {
-      // Use AuthService instead of direct axios call
-      await AuthService.login({
-        email: data.email, // Get email from form data
-        password: data.password, // Get password from form data
-      });
-
-      console.log("Login successful!");
-      navigate(Endpoints.dashboard, { replace: true });
-    } catch (error) {
-      console.error("Login failed:", error.response?.data || error.message);
-      setMessage(
-        error.response?.data?.message || "Login failed. Please try again."
-      );
-    }
+  const onSubmit = async (data: LoginSchema) => {
+    await handleLogin(data);
   };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 p-4">
       <div className="w-full max-w-md p-6 rounded-lg shadow-md bg-white dark:bg-gray-800 mx-4">
@@ -47,7 +30,7 @@ const LoginPage = () => {
             {message}
           </div>
         )}
-        <form onSubmit={handleSubmit(handleLogin)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <label className="block text-gray-700 dark:text-gray-300 mb-2">
               Email

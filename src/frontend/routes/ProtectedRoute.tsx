@@ -2,11 +2,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AuthService from "../service/AuthService";
 import { AuthLoader } from "../components/AuthLoader";
-
-interface ProtectedRouteProps {
-  children?: React.ReactNode; // To support wrapping child routes
-  redirectPath?: string;
-}
+import { ProtectedRouteProps } from "../types";
 
 export const ProtectedRoute = ({
   children,
@@ -37,7 +33,7 @@ export const ProtectedRoute = ({
   }, [location]);
 
   if (isAuthenticated === null) {
-    return <AuthLoader />; // Show loading screen
+    return <AuthLoader />;
   }
 
   if (!isAuthenticated) {

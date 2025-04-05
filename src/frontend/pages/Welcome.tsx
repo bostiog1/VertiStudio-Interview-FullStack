@@ -1,24 +1,18 @@
-import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Endpoints from "../utils/Endpoints";
 
 const Welcome = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // sessionStorage.removeItem('token');
-  }, []);
-
   return (
     <div className="h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
       <div className="w-full max-w-3xl p-8 dark:bg-gray-800 rounded-2xl shadow-xl text-center transition-colors duration-300">
         <h2 className="text-3xl font-bold text-gray-600 dark:text-gray-400 mb-6">
           Welcome to the{" "}
-          <span className="text-red-500 dark:text-red-400">BitSlow</span>{" "}
-          App
+          <span className="text-red-500 dark:text-red-400">BitSlow</span> App
         </h2>
         <p className="text-gray-600 dark:text-gray-300 text-lg mb-8">
-          Securely manage settings with ease.
+          Start managing your digital future today.
         </p>
 
         <div className="flex flex-col space-y-4 max-w-md mx-auto">

@@ -13,6 +13,9 @@ export const loginSchema = yup.object().shape({
     .required("Password is required"),
 });
 
+// Define the TypeScript type for LoginSchema
+export type LoginSchema = yup.InferType<typeof loginSchema>;
+
 // Register schema
 export const registerSchema = yup.object().shape({
   firstName: yup.string().required("Required"),
@@ -21,9 +24,12 @@ export const registerSchema = yup.object().shape({
   mobile: yup
     .string()
     .matches(phoneRegExp, "Phone number is not valid")
-    .required("Required"), // Changed 'contact' to 'mobile'
+    .required("Required"),
   password: yup
     .string()
     .min(5, "Password must be at least 5 characters")
     .required("Required"),
 });
+
+// Define the TypeScript type for RegisterSchema
+export type RegisterSchema = yup.InferType<typeof registerSchema>;
