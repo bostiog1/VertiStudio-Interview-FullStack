@@ -56,7 +56,7 @@ export function seedTransactions(
         latestTransactionDate.toISOString()
       );
 
-      if (Math.random() > 0.5) {
+      if (Math.random() > 0.2) {
         updateCoinOwner.run(buyerId, coinId);
         coinOwners[coinId] = buyerId;
       } else {
