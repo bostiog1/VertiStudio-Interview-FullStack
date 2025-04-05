@@ -24,11 +24,7 @@ const DarkMode = () => {
   }, []);
 
   return (
-    <DarkModeSwitch
-      checked={isDarkMode}
-      onChange={toggleDarkMode}
-      size={20} // More reasonable size
-    />
+    <DarkModeSwitch checked={isDarkMode} onChange={toggleDarkMode} size={20} />
   );
 };
 
