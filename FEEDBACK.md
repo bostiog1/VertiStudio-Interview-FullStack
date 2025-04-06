@@ -12,4 +12,4 @@
 
   -The first time I saw the project I thought it was simple and that I would finish it quickly but as I continued to work and get further and further the more complicated it seemed but at the same time it made me even more ambitious.
 
-  -I think this project is very good. If you want to check that someone has the right skills for the job, this project takes them through a lot of very basic and probably daily working tasks.
+  I think this project is very good. If you want to check that someone has the right skills for the job, this project will take them through many basic and probably daily working tasks.
