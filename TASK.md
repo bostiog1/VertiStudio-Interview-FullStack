@@ -173,9 +173,29 @@ To install dependencies:
 
 ```bash
 bun install
+```
 
 To start dev server:
-
-
+```
 bun dev
 bun start
+```
+To run tests:
+```
+bun test
+```
+To format code:
+```
+bun run format
+```
+To check errors:
+```
+bun run lint
+```
+
+
+
+
+
+
+
