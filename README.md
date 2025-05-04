@@ -55,12 +55,10 @@ Leveraging a modern stack including **React, TypeScript, Vite, and Tailwind CSS*
     * **TypeScript:** Adding static typing for improved code quality and maintainability.
     * **Vite:** As the build tool for a fast development experience.
     * **Tailwind CSS:** For rapid and responsive UI styling.
-    * *(Mention any other significant frontend libraries, e.g., for state management if not using React Context, date handling, etc.)*
 
 * **Backend:**
     * **Bun:** Used as the JavaScript runtime and package manager, handling server-side logic and API endpoints.
     * **SQLite:** Used as the database for storing application data, including users, coins, and transactions.
-    * *(Mention any other significant backend libraries, e.g., for hashing, JWT handling, etc.)*
 
 ## Setup Instructions
 
@@ -75,8 +73,8 @@ Follow these steps to run the application locally.
 1.  **Clone the repository**:
 
     ```bash
-    git clone <Your Repository URL Here>
-    cd <Your Project Folder Name>
+    git clone https://github.com/bostiog1/VertiStudio-Interview-FullStack.git
+    cd VertiStudio-Interview-FullStack
     ```
 
 2.  **Install dependencies:**
@@ -88,9 +86,8 @@ Follow these steps to run the application locally.
 3.  **Start the development server**:
 
     ```bash
-    bun dev
+    bun run dev
     ```
 
 The application should now be running on the address indicated in your console output (typically `http://localhost:3000`).
 
-*(Optional: Add instructions for running tests, formatting, or linting if desired)*
