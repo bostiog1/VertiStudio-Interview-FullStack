@@ -173,3 +173,9 @@ To install dependencies:
 
 ```bash
 bun install
+
+To start dev server:
+
+
+bun dev
+bun start
