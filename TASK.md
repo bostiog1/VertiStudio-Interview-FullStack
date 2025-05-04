@@ -93,9 +93,9 @@ Alberto has outlined the following clear requirements to modernize and enhance t
 
 **Features to Implement:**
 
-- A simple registration form.
-- Secure password support (hashed & stored securely).
-- Basic validation for input fields.
+-   A simple registration form.
+-   Secure password support (hashed & stored securely).
+-   Basic validation for input fields.
 
 ---
 
@@ -105,11 +105,11 @@ Alberto has outlined the following clear requirements to modernize and enhance t
 
 **Features to Implement:**
 
-- Secure login authentication.
-- After logging in, the user should access a **profile page** displaying:
-  - **Total transactions** they have made.
-  - **Total BitSlow currency** they own.
-  - **Total monetary value** of their holdings.
+-   Secure login authentication.
+-   After logging in, the user should access a **profile page** displaying:
+    -   **Total transactions** they have made.
+    -   **Total BitSlow currency** they own.
+    -   **Total monetary value** of their holdings.
 
 ---
 
@@ -119,13 +119,13 @@ Alberto has outlined the following clear requirements to modernize and enhance t
 
 **Features to Implement:**
 
-- **Pagination:** Allow users to view **15, 30, or 50 transactions per page**.
-- **Smooth navigation:** Users should easily browse pages (**1, 2, …, 50**).
-- **Filtering Options:**
-  - By **Date Range** (Start & End Dates).
-  - By **BitSlow Value Range**.
-  - By **Buyer Name**.
-  - By **Seller Name**.
+-   **Pagination:** Allow users to view **15, 30, or 50 transactions per page**.
+-   **Smooth navigation:** Users should easily browse pages (**1, 2, …, 50**).
+-   **Filtering Options:**
+    -   By **Date Range** (Start & End Dates).
+    -   By **BitSlow Value Range**.
+    -   By **Buyer Name**.
+    -   By **Seller Name**.
 
 Bonus Challenge: New transactions should appear without requiring a manual refresh.
 
@@ -137,9 +137,9 @@ Bonus Challenge: New transactions should appear without requiring a manual refre
 
 **Features to Implement:**
 
-- Minimize page load time.
-- Provide **clear error messages** when issues occur.
-- Implement **visual indicators** (e.g., loading spinners, success/error messages).
+-   Minimize page load time.
+-   Provide **clear error messages** when issues occur.
+-   Implement **visual indicators** (e.g., loading spinners, success/error messages).
 
 ---
 
@@ -149,21 +149,21 @@ Bonus Challenge: New transactions should appear without requiring a manual refre
 
 **Features to Implement:**
 
-- **BitSlow Marketplace Dashboard:**
-  - Displays all **available BitSlows** (paginated, 30 per page).
-  - Shows each coin’s details:
-    - **Hash** (Unique ID).
-    - **Component Numbers** (3 numbers used in the hash).
-    - **Monetary Value**.
-    - **Current Owner (if any).**
-  - Includes a **"Buy" button** (only for unowned BitSlows).
-- **Buying Process:**
-  - When a user **buys** a BitSlow, a new **transaction is recorded**, and **ownership is transferred**. (No need to check if the buyer can afford it, but change the owner with the new transaction).
-- **Generating New BitSlows:**
-  - Users can **generate a new BitSlow** by clicking **"Generate Coin"**.
-  - They must enter an amount. (Think what component is the best for representing this: modal, new page, etc.)
-  - The system should **find 3 unique numbers** that haven't been used in an existing BitSlow.
-  - If no unique combinations remain, the **"Generate Coin"** button should disappear.
+-   **BitSlow Marketplace Dashboard:**
+    -   Displays all **available BitSlows** (paginated, 30 per page).
+    -   Shows each coin’s details:
+        -   **Hash** (Unique ID).
+        -   **Component Numbers** (3 numbers used in the hash).
+        -   **Monetary Value**.
+        -   **Current Owner (if any).**
+    -   Includes a **"Buy" button** (only for unowned BitSlows).
+-   **Buying Process:**
+    -   When a user **buys** a BitSlow, a new **transaction is recorded**, and **ownership is transferred**. (No need to check if the buyer can afford it, but change the owner with the new transaction).
+-   **Generating New BitSlows:**
+    -   Users can **generate a new BitSlow** by clicking **"Generate Coin"**.
+    -   They must enter an amount. (Think what component is the best for representing this: modal, new page, etc.)
+    -   The system should **find 3 unique numbers** that haven't been used in an existing BitSlow.
+    -   If no unique combinations remain, the **"Generate Coin"** button should disappear.
 
 Bonus Challenge: For each coin, offer the possibility to display the previous owners of the coin based on the transaction history. (Tip: It can be a simple button that displays a popup with the owner list).
 
@@ -173,37 +173,3 @@ To install dependencies:
 
 ```bash
 bun install
-```
-
-To start a development server:
-
-```bash
-bun dev
-```
-
-To run for production:
-
-```bash
-bun start
-```
-
-To run tests:
-
-```bash
-bun test
-```
-
-To run format the code:
-
-```bash
-bun run format
-```
-
-To check for possible errors:
-
-```bash
-bun run lint
-```
-#   V e r t i S t u d i o - I n t e r v i e w 
- 
- 
